@@ -1,0 +1,7 @@
+*
+!.gitignore
+!shader/
+shader/*
+!shader/invert.txt
+!shader/insideout.txt
+!shader/replace.txt

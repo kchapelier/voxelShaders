@@ -1,0 +1,27 @@
+// console command
+// 'xs invert off on’ : e.g. 'xs invert 0 1’
+
+// shader inputs
+// uniform vec3    iVolumeSize;    // volume size [1-126]
+// uniform float   iColorIndex;    // current color index [1-255]
+// uniform vec3    iMirror;        // current mirror mode [0-1]
+// uniform vec3    iAxis;          // current axis mode [0-1]
+// uniform float   iFrame;         // current frame
+// uniform float   iArgs[8];       // user args
+
+// built-in functions
+// float voxel(vec3 v);
+
+float map(vec3 v) {
+  int on = int(iArgs[0] + 0.5);
+  int off = int(iArgs[1] + 0.5);
+  int currentValue = int(voxel(v));
+
+  if (currentValue == on) {
+    return float(off);
+  } else if(currentValue == off) {
+    return float(on);
+  }
+  
+  return float(currentValue);
+}

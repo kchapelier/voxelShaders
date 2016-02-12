@@ -1,0 +1,39 @@
+// console command
+// 'xs insideout’ : e.g. 'xs insideout’
+
+// shader inputs
+// uniform vec3    iVolumeSize;    // volume size [1-126]
+// uniform float   iColorIndex;    // current color index [1-255]
+// uniform vec3    iMirror;        // current mirror mode [0-1]
+// uniform vec3    iAxis;          // current axis mode [0-1]
+// uniform float   iFrame;         // current frame
+// uniform float   iArgs[8];       // user args
+
+// built-in functions
+// float voxel(vec3 v);
+
+float map(vec3 v) {
+  vec3 center = iVolumeSize / 2.0;
+
+  vec3 newPos = vec3(0.);
+
+  if(v.x < center.x) {
+    newPos.x = center.x - v.x;
+  } else {
+    newPos.x = iVolumeSize.x - mod(v.x, center.x);
+  }
+
+  if(v.y < center.y) {
+    newPos.y = center.y - v.y;
+  } else {
+    newPos.y = iVolumeSize.y - mod(v.y, center.y);
+  }
+
+  if(v.z < center.z) {
+    newPos.z = center.z - v.z;
+  } else {
+    newPos.z = iVolumeSize.z - mod(v.z, center.z);
+  }
+
+  return voxel(floor(newPos));
+}
