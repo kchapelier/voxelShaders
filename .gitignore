@@ -7,3 +7,5 @@ shader/*
 !shader/insideout.txt
 !shader/replace.txt
 !shader/random.txt
+!shader/perlin.txt
+!shader/simplex.txt
