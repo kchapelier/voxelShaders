@@ -18,22 +18,22 @@ float map(vec3 v) {
   vec3 newPos = vec3(0.);
 
   if(v.x < center.x) {
-    newPos.x = center.x - v.x;
+    newPos.x = floor(center.x - v.x);
   } else {
-    newPos.x = iVolumeSize.x - mod(v.x, center.x);
+    newPos.x = ceil(iVolumeSize.x - mod(v.x, center.x));
   }
 
   if(v.y < center.y) {
-    newPos.y = center.y - v.y;
+    newPos.y = floor(center.y - v.y);
   } else {
-    newPos.y = iVolumeSize.y - mod(v.y, center.y);
+    newPos.y = ceil(iVolumeSize.y - mod(v.y, center.y));
   }
 
   if(v.z < center.z) {
-    newPos.z = center.z - v.z;
+    newPos.z = floor(center.z - v.z);
   } else {
-    newPos.z = iVolumeSize.z - mod(v.z, center.z);
+    newPos.z = ceil(iVolumeSize.z - mod(v.z, center.z));
   }
 
-  return voxel(floor(newPos));
+  return voxel(newPos);
 }

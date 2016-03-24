@@ -1,0 +1,28 @@
+// console command
+// 'xs random proba seed symmetry' : e.g. 'xs random 0.65 13576543 1'
+
+// shader inputs
+// uniform vec3    iVolumeSize;    // volume size [1-126]
+// uniform float   iColorIndex;    // current color index [1-255]
+// uniform vec3    iMirror;        // current mirror mode [0-1]
+// uniform vec3    iAxis;          // current axis mode [0-1]
+// uniform float   iFrame;         // current frame
+// uniform float   iArgs[8];       // user args
+
+// built-in functions
+// float voxel(vec3 v);
+
+float rand(vec3 co, float seed) {
+  co = co + vec3(fract(sin(dot(vec2(iFrame * 5.9898, seed * 78.5453), vec2(12.9898,78.233))) * 43758.5453));
+  return fract(sin(dot(co.xy + vec2(length(co.yz) * 24.0316), vec2(12.9898,78.233)) + dot(co.yz + vec2(length(co.zx) * 24.0316), vec2(12.9898,78.233)) + dot(co.zx + vec2(length(co.xy) * 24.0316), vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float map(vec3 v) {
+  float proba = iArgs[0];
+  float seed = iArgs[1] / 179.;
+  if (iArgs[2] > 0.) {
+    v = abs(v - iVolumeSize / 2.);
+  }
+
+  return rand(v, seed) < proba ? iColorIndex : 0.;
+}

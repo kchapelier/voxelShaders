@@ -6,3 +6,4 @@ shader/*
 !shader/invert.txt
 !shader/insideout.txt
 !shader/replace.txt
+!shader/random.txt
